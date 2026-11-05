@@ -209,7 +209,7 @@ Cada defecto es un issue de GitHub, numerado como D-n, con una etiqueta de tipo 
 
 **Sin aprobaciones obligatorias.** La protección exige cero aprobaciones, porque GitHub no deja aprobar un pull request propio y en un proyecto individual bloquearía todo merge. La evidencia de la revisión manual son la lista marcada y el comentario.
 
-**Cómo se aplicó.** En tres pull requests, el comentario de revisión se dejó después del merge. La sección 9 de [Reporte-Mejora.md](Reporte-Mejora.md#9-revisión-manual) lo detalla.
+**Cómo se aplicó.** En cuatro pull requests, el comentario de revisión se dejó después del merge. La sección 9 de [Reporte-Mejora.md](Reporte-Mejora.md#9-revisión-manual) lo detalla.
 
 Los pull requests de demostración de los gates se cierran sin merge y no llevan revisión manual.
 
