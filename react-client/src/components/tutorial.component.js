@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
-import { withRouter } from '../common/with-router';
+import { withRouter } from "../common/with-router";
 
 class Tutorial extends Component {
   constructor(props) {
@@ -17,9 +17,9 @@ class Tutorial extends Component {
         id: null,
         title: "",
         description: "",
-        published: false
+        published: false,
       },
-      message: ""
+      message: "",
     };
   }
 
@@ -30,36 +30,36 @@ class Tutorial extends Component {
   onChangeTitle(e) {
     const title = e.target.value;
 
-    this.setState(function(prevState) {
+    this.setState(function (prevState) {
       return {
         currentTutorial: {
           ...prevState.currentTutorial,
-          title: title
-        }
+          title: title,
+        },
       };
     });
   }
 
   onChangeDescription(e) {
     const description = e.target.value;
-    
-    this.setState(prevState => ({
+
+    this.setState((prevState) => ({
       currentTutorial: {
         ...prevState.currentTutorial,
-        description: description
-      }
+        description: description,
+      },
     }));
   }
 
   getTutorial(id) {
     TutorialDataService.get(id)
-      .then(response => {
+      .then((response) => {
         this.setState({
-          currentTutorial: response.data
+          currentTutorial: response.data,
         });
         console.log(response.data);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   }
@@ -69,20 +69,20 @@ class Tutorial extends Component {
       id: this.state.currentTutorial.id,
       title: this.state.currentTutorial.title,
       description: this.state.currentTutorial.description,
-      published: status
+      published: status,
     };
 
     TutorialDataService.update(this.state.currentTutorial.id, data)
-      .then(response => {
-        this.setState(prevState => ({
+      .then((response) => {
+        this.setState((prevState) => ({
           currentTutorial: {
             ...prevState.currentTutorial,
-            published: status
-          }
+            published: status,
+          },
         }));
         console.log(response.data);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   }
@@ -90,26 +90,26 @@ class Tutorial extends Component {
   updateTutorial() {
     TutorialDataService.update(
       this.state.currentTutorial.id,
-      this.state.currentTutorial
+      this.state.currentTutorial,
     )
-      .then(response => {
+      .then((response) => {
         console.log(response.data);
         this.setState({
-          message: "The tutorial was updated successfully!"
+          message: "The tutorial was updated successfully!",
         });
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   }
 
-  deleteTutorial() {    
+  deleteTutorial() {
     TutorialDataService.delete(this.state.currentTutorial.id)
-      .then(response => {
+      .then((response) => {
         console.log(response.data);
-        this.props.router.navigate('/tutorials');
+        this.props.router.navigate("/tutorials");
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   }
