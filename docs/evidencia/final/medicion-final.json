@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-05T17:30:42.266Z",
+ "generado": "2026-11-05T17:31:13.277Z",
  "corrida_final": "42073629992",
  "repo": "arlex13/pipeline-sqa-tutoriales",
  "base": {
@@ -387,7 +387,7 @@
   },
   "prettier": {
    "revisados": 24,
-   "sin_formato": 0
+   "sin_formato": 19
   },
   "audit": {
    "servidor": {

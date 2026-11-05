@@ -1,0 +1,74 @@
+[
+ {
+  "pr": 18,
+  "gate": "Prueba fallida",
+  "motivo": "RG-01 y RG-03 fallan; RG-02 pasa",
+  "corrida": "https://github.com/arlex13/pipeline-sqa-tutoriales/actions/runs/42038649184",
+  "fecha": "2026-11-05T13:45:50Z",
+  "evento": "pull_request",
+  "sha": "725f0cf",
+  "conclusion": "failure",
+  "fallaron": [
+   {
+    "job": "test",
+    "pasos": [
+     "Pruebas del backend, con cobertura y umbral"
+    ]
+   }
+  ]
+ },
+ {
+  "pr": 19,
+  "gate": "Prueba fallida",
+  "motivo": "RG-04 falla",
+  "corrida": "https://github.com/arlex13/pipeline-sqa-tutoriales/actions/runs/42042336830",
+  "fecha": "2026-11-05T14:09:53Z",
+  "evento": "pull_request",
+  "sha": "738e545",
+  "conclusion": "failure",
+  "fallaron": [
+   {
+    "job": "test",
+    "pasos": [
+     "Pruebas del backend, con cobertura y umbral"
+    ]
+   }
+  ]
+ },
+ {
+  "pr": 20,
+  "gate": "Quality gate de SonarCloud",
+  "motivo": "0.0 % de cobertura y fiabilidad D en el código nuevo",
+  "corrida": "https://github.com/arlex13/pipeline-sqa-tutoriales/actions/runs/42045496952",
+  "fecha": "2026-11-05T14:29:26Z",
+  "evento": "pull_request",
+  "sha": "45edf54",
+  "conclusion": "failure",
+  "fallaron": [
+   {
+    "job": "analyze",
+    "pasos": [
+     "Análisis de SonarCloud y quality gate"
+    ]
+   }
+  ]
+ },
+ {
+  "pr": 21,
+  "gate": "ESLint con errores",
+  "motivo": "no-var en el servidor",
+  "corrida": "https://github.com/arlex13/pipeline-sqa-tutoriales/actions/runs/42045513199",
+  "fecha": "2026-11-05T14:29:32Z",
+  "evento": "pull_request",
+  "sha": "e545963",
+  "conclusion": "failure",
+  "fallaron": [
+   {
+    "job": "analyze",
+    "pasos": [
+     "ESLint del servidor"
+    ]
+   }
+  ]
+ }
+]
