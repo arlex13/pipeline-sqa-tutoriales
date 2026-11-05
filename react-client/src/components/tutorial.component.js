@@ -57,7 +57,6 @@ class Tutorial extends Component {
         this.setState({
           currentTutorial: response.data,
         });
-        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -73,14 +72,13 @@ class Tutorial extends Component {
     };
 
     TutorialDataService.update(this.state.currentTutorial.id, data)
-      .then((response) => {
+      .then(() => {
         this.setState((prevState) => ({
           currentTutorial: {
             ...prevState.currentTutorial,
             published: status,
           },
         }));
-        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -92,8 +90,7 @@ class Tutorial extends Component {
       this.state.currentTutorial.id,
       this.state.currentTutorial,
     )
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
         this.setState({
           message: "The tutorial was updated successfully!",
         });
@@ -105,8 +102,7 @@ class Tutorial extends Component {
 
   deleteTutorial() {
     TutorialDataService.delete(this.state.currentTutorial.id)
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
         this.props.router.navigate("/tutorials");
       })
       .catch((e) => {
@@ -145,9 +141,7 @@ class Tutorial extends Component {
               </div>
 
               <div className="form-group">
-                <label>
-                  <strong>Status:</strong>
-                </label>
+                <strong className="d-inline-block mb-2">Status:</strong>
                 {currentTutorial.published ? "Published" : "Pending"}
               </div>
             </form>

@@ -38,7 +38,6 @@ export default class TutorialsList extends Component {
         this.setState({
           tutorials: response.data,
         });
-        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -62,8 +61,7 @@ export default class TutorialsList extends Component {
 
   removeAllTutorials() {
     TutorialDataService.deleteAll()
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
         this.refreshList();
       })
       .catch((e) => {
@@ -82,7 +80,6 @@ export default class TutorialsList extends Component {
         this.setState({
           tutorials: response.data,
         });
-        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -119,19 +116,20 @@ export default class TutorialsList extends Component {
           <h4>Tutorials List</h4>
 
           <ul className="list-group">
-            {tutorials &&
-              tutorials.map((tutorial, index) => (
-                <li
+            {tutorials?.map((tutorial, index) => (
+              <li className="list-group-item p-0" key={tutorial.id}>
+                <button
+                  type="button"
                   className={
-                    "list-group-item " +
+                    "list-group-item list-group-item-action border-0 " +
                     (index === currentIndex ? "active" : "")
                   }
                   onClick={() => this.setActiveTutorial(tutorial, index)}
-                  key={index}
                 >
                   {tutorial.title}
-                </li>
-              ))}
+                </button>
+              </li>
+            ))}
           </ul>
 
           <button
@@ -146,21 +144,15 @@ export default class TutorialsList extends Component {
             <div>
               <h4>Tutorial</h4>
               <div>
-                <label>
-                  <strong>Title:</strong>
-                </label>{" "}
+                <strong className="d-inline-block mb-2">Title:</strong>{" "}
                 {currentTutorial.title}
               </div>
               <div>
-                <label>
-                  <strong>Description:</strong>
-                </label>{" "}
+                <strong className="d-inline-block mb-2">Description:</strong>{" "}
                 {currentTutorial.description}
               </div>
               <div>
-                <label>
-                  <strong>Status:</strong>
-                </label>{" "}
+                <strong className="d-inline-block mb-2">Status:</strong>{" "}
                 {currentTutorial.published ? "Published" : "Pending"}
               </div>
 
