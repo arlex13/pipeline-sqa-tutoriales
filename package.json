@@ -1,0 +1,14 @@
+{
+  "name": "pipeline-sqa-tutoriales",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pipeline CI/CD con aseguramiento de calidad integrado, sobre una aplicación CRUD React + Express + MySQL",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write --no-error-on-unmatched-pattern \"*.{json,md,yml}\" \".github/**/*.{yml,md}\" \"docs/**/*.md\" \"node-express-server/**/*.{js,mjs,json}\" \"react-client/*.json\" \"react-client/{public,src}/**/*.{js,css,html,json}\"",
+    "format:check": "prettier --check --no-error-on-unmatched-pattern \"*.{json,md,yml}\" \".github/**/*.{yml,md}\" \"docs/**/*.md\" \"node-express-server/**/*.{js,mjs,json}\" \"react-client/*.json\" \"react-client/{public,src}/**/*.{js,css,html,json}\""
+  },
+  "devDependencies": {
+    "prettier": "3.9.10"
+  }
+}

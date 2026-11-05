@@ -1,0 +1,8 @@
+**/node_modules/
+**/coverage/
+**/build/
+**/package-lock.json
+**/test-results.json
+docs/evidencia/
+docs/presentacion/
+docs/img/
