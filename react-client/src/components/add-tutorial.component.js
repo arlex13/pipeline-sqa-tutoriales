@@ -32,7 +32,7 @@ export default class AddTutorial extends Component {
   }
 
   saveTutorial() {
-    var data = {
+    const data = {
       title: this.state.title,
       description: this.state.description,
     };

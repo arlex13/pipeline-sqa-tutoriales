@@ -35,7 +35,7 @@ exports.create = (req, res) => {
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
   const title = req.query.title;
-  var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  const condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
   Tutorial.findAll({ where: condition })
     .then((data) => {
@@ -64,6 +64,7 @@ exports.findOne = (req, res) => {
       }
     })
     .catch((err) => {
+      console.error("Error retrieving Tutorial:", err.message);
       res.status(500).send({
         message: "Error retrieving Tutorial with id=" + id,
       });
@@ -77,8 +78,8 @@ exports.update = (req, res) => {
   Tutorial.update(req.body, {
     where: { id: id },
   })
-    .then((num) => {
-      if (num == 1) {
+    .then(([num]) => {
+      if (num === 1) {
         res.send({
           message: "Tutorial was updated successfully.",
         });
@@ -89,6 +90,7 @@ exports.update = (req, res) => {
       }
     })
     .catch((err) => {
+      console.error("Error updating Tutorial:", err.message);
       res.status(500).send({
         message: "Error updating Tutorial with id=" + id,
       });
@@ -103,7 +105,7 @@ exports.delete = (req, res) => {
     where: { id: id },
   })
     .then((num) => {
-      if (num == 1) {
+      if (num === 1) {
         res.send({
           message: "Tutorial was deleted successfully!",
         });
@@ -114,6 +116,7 @@ exports.delete = (req, res) => {
       }
     })
     .catch((err) => {
+      console.error("Error deleting Tutorial:", err.message);
       res.status(500).send({
         message: "Could not delete Tutorial with id=" + id,
       });

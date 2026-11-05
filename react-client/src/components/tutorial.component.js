@@ -65,7 +65,7 @@ class Tutorial extends Component {
   }
 
   updatePublished(status) {
-    var data = {
+    const data = {
       id: this.state.currentTutorial.id,
       title: this.state.currentTutorial.title,
       description: this.state.currentTutorial.description,
