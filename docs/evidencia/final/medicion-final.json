@@ -1,0 +1,1419 @@
+{
+ "generado": "2026-11-05T17:30:42.266Z",
+ "corrida_final": "42073629992",
+ "repo": "arlex13/pipeline-sqa-tutoriales",
+ "base": {
+  "etiqueta": "v0-linea-base",
+  "commit": "4211d44",
+  "pruebas": {
+   "total": 0
+  },
+  "lineas": {
+   "ref": "v0-linea-base",
+   "commit": "4211d44",
+   "servidor": {
+    "archivos_js": 6,
+    "lineas_js": 276,
+    "archivos_aplicacion": 6,
+    "lineas_aplicacion": 276,
+    "archivos_prueba": 0,
+    "lineas_prueba": 0
+   },
+   "cliente": {
+    "archivos_js": 10,
+    "lineas_js": 752,
+    "archivos_aplicacion": 9,
+    "lineas_aplicacion": 747,
+    "archivos_prueba": 0,
+    "lineas_prueba": 0
+   }
+  },
+  "sonar": {
+   "medidas": {
+    "complexity": "103",
+    "minor_violations": "11",
+    "duplicated_lines_density": "0.0",
+    "duplicated_lines": "0",
+    "functions": "84",
+    "classes": "5",
+    "security_hotspots_reviewed": "100.0",
+    "statements": "181",
+    "sqale_index": "70",
+    "sqale_rating": "1.0",
+    "blocker_violations": "0",
+    "bugs": "1",
+    "lines_to_cover": "160",
+    "major_violations": "7",
+    "duplicated_files": "0",
+    "reliability_remediation_effort": "5",
+    "ncloc": "778",
+    "line_coverage": "0.0",
+    "lines": "944",
+    "coverage": "0.0",
+    "reliability_rating": "2.0",
+    "code_smells": "14",
+    "security_rating": "3.0",
+    "violations": "23",
+    "sqale_debt_ratio": "0.3",
+    "security_hotspots": "0",
+    "security_review_rating": "1.0",
+    "critical_violations": "5",
+    "info_violations": "0",
+    "alert_status": "OK",
+    "uncovered_lines": "160",
+    "cognitive_complexity": "20",
+    "duplicated_blocks": "0",
+    "vulnerabilities": "8",
+    "files": "17",
+    "open_issues": "23",
+    "software_quality_reliability_issues": "6",
+    "security_remediation_effort": "215",
+    "software_quality_security_issues": "8",
+    "software_quality_maintainability_issues": "10"
+   },
+   "distribucion": {
+    "total": 23,
+    "severidad_antigua": {
+     "CRITICAL": 5,
+     "MINOR": 11,
+     "MAJOR": 7
+    },
+    "tipo_antiguo": {
+     "CODE_SMELL": 14,
+     "VULNERABILITY": 8,
+     "BUG": 1
+    },
+    "cualidad_y_severidad": {
+     "MAINTAINABILITY/HIGH": 5,
+     "MAINTAINABILITY/LOW": 3,
+     "SECURITY/MEDIUM": 1,
+     "SECURITY/LOW": 7,
+     "RELIABILITY/MEDIUM": 4,
+     "RELIABILITY/LOW": 2,
+     "MAINTAINABILITY/MEDIUM": 2
+    },
+    "regla": {
+     "javascript:S3504": 5,
+     "javascript:S7726": 2,
+     "text:S8564": 1,
+     "jssecurity:S5145": 7,
+     "javascript:S6853": 4,
+     "javascript:S6582": 1,
+     "javascript:S1082": 1,
+     "javascript:S6847": 1,
+     "javascript:S6479": 1
+    },
+    "archivo": {
+     "node-express-server/app/controllers/tutorial.controller.js": 1,
+     "node-express-server/app/models/tutorial.model.js": 1,
+     "node-express-server/app/routes/turorial.routes.js": 2,
+     "node-express-server/package.json": 1,
+     "node-express-server/server.js": 1,
+     "react-client/src/components/add-tutorial.component.js": 2,
+     "react-client/src/components/tutorial.component.js": 5,
+     "react-client/src/components/tutorials-list.component.js": 10
+    }
+   },
+   "gate": {
+    "status": "OK",
+    "conditions": [
+     {
+      "status": "OK",
+      "metricKey": "new_reliability_rating",
+      "comparator": "GT",
+      "periodIndex": 1,
+      "errorThreshold": "1",
+      "actualValue": "1"
+     },
+     {
+      "status": "OK",
+      "metricKey": "new_security_rating",
+      "comparator": "GT",
+      "periodIndex": 1,
+      "errorThreshold": "1",
+      "actualValue": "1"
+     },
+     {
+      "status": "OK",
+      "metricKey": "new_maintainability_rating",
+      "comparator": "GT",
+      "periodIndex": 1,
+      "errorThreshold": "1",
+      "actualValue": "1"
+     },
+     {
+      "status": "OK",
+      "metricKey": "new_security_hotspots_reviewed",
+      "comparator": "LT",
+      "periodIndex": 1,
+      "errorThreshold": "100",
+      "actualValue": "100.0"
+     }
+    ],
+    "periods": [
+     {
+      "index": 1,
+      "mode": "previous_version",
+      "date": "2026-11-05T08:13:08+0000"
+     }
+    ],
+    "ignoredConditions": false
+   },
+   "analisis": {
+    "key": "028b725d-34bb-4dd1-8478-fa008f42df8a",
+    "date": "2026-11-05T08:20:37+0000",
+    "events": [
+     {
+      "key": "AaGqzV05-PMe27N8KoQJ",
+      "category": "VERSION",
+      "name": "0.0.0"
+     },
+     {
+      "key": "AaGqzV0v-PMe27N8KoQI",
+      "category": "QUALITY_PROFILE",
+      "name": "Stop using 'Sonar way core' (web)"
+     },
+     {
+      "key": "AaGqzV0v-PMe27N8KoQH",
+      "category": "QUALITY_PROFILE",
+      "name": "Stop using 'Sonar way core' (js)"
+     },
+     {
+      "key": "AaGqzV0v-PMe27N8KoQG",
+      "category": "QUALITY_PROFILE",
+      "name": "Use 'Sonar way comprehensive' (css)"
+     },
+     {
+      "key": "AaGqzV0v-PMe27N8KoQF",
+      "category": "QUALITY_PROFILE",
+      "name": "Stop using 'Sonar way core' (css)"
+     },
+     {
+      "key": "AaGqzV0v-PMe27N8KoQE",
+      "category": "QUALITY_PROFILE",
+      "name": "Use 'Sonar way comprehensive' (js)"
+     },
+     {
+      "key": "AaGqzV0v-PMe27N8KoQD",
+      "category": "QUALITY_PROFILE",
+      "name": "Use 'Sonar way comprehensive' (json)"
+     },
+     {
+      "key": "AaGqzV0v-PMe27N8KoQC",
+      "category": "QUALITY_PROFILE",
+      "name": "Stop using 'Sonar way core' (json)"
+     }
+    ],
+    "projectVersion": "0.0.0",
+    "manualNewCodePeriodBaseline": false,
+    "revision": "4211d44203e7b4c291846838057000289b18a0f3"
+   },
+   "perfiles": [
+    {
+     "lenguaje": "css",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 49
+    },
+    {
+     "lenguaje": "docker",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 61
+    },
+    {
+     "lenguaje": "githubactions",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 45
+    },
+    {
+     "lenguaje": "js",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 481
+    },
+    {
+     "lenguaje": "json",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 2
+    },
+    {
+     "lenguaje": "secrets",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 357
+    },
+    {
+     "lenguaje": "text",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 11
+    },
+    {
+     "lenguaje": "ts",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 496
+    },
+    {
+     "lenguaje": "web",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 61
+    },
+    {
+     "lenguaje": "yaml",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 2
+    }
+   ],
+   "hotspots": 0,
+   "archivos": [
+    {
+     "ruta": "react-client/src/components/add-tutorial.component.js",
+     "lenguaje": "js",
+     "ncloc": 103,
+     "lineas": 115
+    },
+    {
+     "ruta": "react-client/src/App.css",
+     "lenguaje": "css",
+     "ncloc": 13,
+     "lineas": 16
+    },
+    {
+     "ruta": "react-client/src/App.js",
+     "lenguaje": "js",
+     "ncloc": 42,
+     "lineas": 46
+    },
+    {
+     "ruta": "node-express-server/app/config/db.config.js",
+     "lenguaje": "js",
+     "ncloc": 13,
+     "lineas": 14
+    },
+    {
+     "ruta": "react-client/src/http-common.js",
+     "lenguaje": "js",
+     "ncloc": 7,
+     "lineas": 8
+    },
+    {
+     "ruta": "react-client/src/index.js",
+     "lenguaje": "js",
+     "ncloc": 13,
+     "lineas": 18
+    },
+    {
+     "ruta": "node-express-server/app/models/index.js",
+     "lenguaje": "js",
+     "ncloc": 18,
+     "lineas": 25
+    },
+    {
+     "ruta": "node-express-server/package.json",
+     "lenguaje": "json",
+     "ncloc": 0,
+     "lineas": 26
+    },
+    {
+     "ruta": "node-express-server/server.js",
+     "lenguaje": "js",
+     "ncloc": 25,
+     "lineas": 45
+    },
+    {
+     "ruta": "react-client/src/setupTests.js",
+     "lenguaje": "js",
+     "ncloc": 1,
+     "lineas": 6
+    },
+    {
+     "ruta": "node-express-server/app/routes/turorial.routes.js",
+     "lenguaje": "js",
+     "ncloc": 12,
+     "lineas": 29
+    },
+    {
+     "ruta": "react-client/src/components/tutorial.component.js",
+     "lenguaje": "js",
+     "ncloc": 183,
+     "lineas": 198
+    },
+    {
+     "ruta": "node-express-server/app/controllers/tutorial.controller.js",
+     "lenguaje": "js",
+     "ncloc": 129,
+     "lineas": 153
+    },
+    {
+     "ruta": "node-express-server/app/models/tutorial.model.js",
+     "lenguaje": "js",
+     "ncloc": 14,
+     "lineas": 16
+    },
+    {
+     "ruta": "react-client/src/services/tutorial.service.js",
+     "lenguaje": "js",
+     "ncloc": 25,
+     "lineas": 33
+    },
+    {
+     "ruta": "react-client/src/components/tutorials-list.component.js",
+     "lenguaje": "js",
+     "ncloc": 170,
+     "lineas": 184
+    },
+    {
+     "ruta": "react-client/src/common/with-router.js",
+     "lenguaje": "js",
+     "ncloc": 10,
+     "lineas": 12
+    }
+   ]
+  },
+  "eslint": {
+   "servidor": {
+    "errores": 8,
+    "advertencias": 0,
+    "reglas": {
+     "no-var": 3,
+     "no-unused-vars": 3,
+     "eqeqeq": 2
+    }
+   },
+   "cliente": {
+    "errores": 0,
+    "advertencias": 3,
+    "reglas": {
+     "no-var": 2,
+     "import/no-anonymous-default-export": 1
+    }
+   }
+  },
+  "prettier": {
+   "revisados": 24,
+   "sin_formato": 0
+  },
+  "audit": {
+   "servidor": {
+    "critica": 1,
+    "alta": 0,
+    "moderada": 2,
+    "baja": 0,
+    "total": 3,
+    "dependencias": 103,
+    "dependencias_produccion": 104,
+    "paquetes": {
+     "mysql2": {
+      "severidad": "critical",
+      "directa": true
+     },
+     "sequelize": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "uuid": {
+      "severidad": "moderate",
+      "directa": false
+     }
+    }
+   },
+   "cliente": {
+    "critica": 0,
+    "alta": 14,
+    "moderada": 7,
+    "baja": 16,
+    "total": 37,
+    "dependencias": 1517,
+    "dependencias_produccion": 1509,
+    "paquetes": {
+     "@jest/core": {
+      "severidad": "low",
+      "directa": false
+     },
+     "@rollup/plugin-node-resolve": {
+      "severidad": "low",
+      "directa": false
+     },
+     "@svgr/plugin-svgo": {
+      "severidad": "high",
+      "directa": false
+     },
+     "@svgr/webpack": {
+      "severidad": "low",
+      "directa": false
+     },
+     "@tootallnate/once": {
+      "severidad": "low",
+      "directa": false
+     },
+     "axios": {
+      "severidad": "high",
+      "directa": true
+     },
+     "bfj": {
+      "severidad": "high",
+      "directa": false
+     },
+     "css-minimizer-webpack-plugin": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "css-select": {
+      "severidad": "high",
+      "directa": false
+     },
+     "deepmerge": {
+      "severidad": "low",
+      "directa": false
+     },
+     "fork-ts-checker-webpack-plugin": {
+      "severidad": "low",
+      "directa": false
+     },
+     "http-proxy-agent": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-cli": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-config": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-environment-jsdom": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-runner": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-watch-typeahead": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jsdom": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jsonpath": {
+      "severidad": "high",
+      "directa": false
+     },
+     "nth-check": {
+      "severidad": "high",
+      "directa": false
+     },
+     "postcss": {
+      "severidad": "high",
+      "directa": false
+     },
+     "react-dev-utils": {
+      "severidad": "low",
+      "directa": false
+     },
+     "react-router": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "react-router-dom": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "react-scripts": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "resolve-url-loader": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "rollup-plugin-terser": {
+      "severidad": "high",
+      "directa": false
+     },
+     "serialize-javascript": {
+      "severidad": "high",
+      "directa": false
+     },
+     "sockjs": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "svgo": {
+      "severidad": "high",
+      "directa": false
+     },
+     "underscore": {
+      "severidad": "high",
+      "directa": false
+     },
+     "uuid": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "webpack-dev-middleware": {
+      "severidad": "high",
+      "directa": false
+     },
+     "webpack-dev-server": {
+      "severidad": "high",
+      "directa": false
+     },
+     "workbox-build": {
+      "severidad": "high",
+      "directa": false
+     },
+     "workbox-webpack-plugin": {
+      "severidad": "low",
+      "directa": false
+     }
+    }
+   }
+  },
+  "audit_repetido": {
+   "servidor": {
+    "critica": 1,
+    "alta": 0,
+    "moderada": 2,
+    "baja": 0,
+    "total": 3,
+    "dependencias": 103,
+    "dependencias_produccion": 104,
+    "paquetes": {
+     "mysql2": {
+      "severidad": "critical",
+      "directa": true
+     },
+     "sequelize": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "uuid": {
+      "severidad": "moderate",
+      "directa": false
+     }
+    }
+   },
+   "cliente": {
+    "critica": 0,
+    "alta": 14,
+    "moderada": 7,
+    "baja": 16,
+    "total": 37,
+    "dependencias": 1517,
+    "dependencias_produccion": 1509,
+    "paquetes": {
+     "@jest/core": {
+      "severidad": "low",
+      "directa": false
+     },
+     "@rollup/plugin-node-resolve": {
+      "severidad": "low",
+      "directa": false
+     },
+     "@svgr/plugin-svgo": {
+      "severidad": "high",
+      "directa": false
+     },
+     "@svgr/webpack": {
+      "severidad": "low",
+      "directa": false
+     },
+     "@tootallnate/once": {
+      "severidad": "low",
+      "directa": false
+     },
+     "axios": {
+      "severidad": "high",
+      "directa": true
+     },
+     "bfj": {
+      "severidad": "high",
+      "directa": false
+     },
+     "css-minimizer-webpack-plugin": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "css-select": {
+      "severidad": "high",
+      "directa": false
+     },
+     "deepmerge": {
+      "severidad": "low",
+      "directa": false
+     },
+     "fork-ts-checker-webpack-plugin": {
+      "severidad": "low",
+      "directa": false
+     },
+     "http-proxy-agent": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-cli": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-config": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-environment-jsdom": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-runner": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-watch-typeahead": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jsdom": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jsonpath": {
+      "severidad": "high",
+      "directa": false
+     },
+     "nth-check": {
+      "severidad": "high",
+      "directa": false
+     },
+     "postcss": {
+      "severidad": "high",
+      "directa": false
+     },
+     "react-dev-utils": {
+      "severidad": "low",
+      "directa": false
+     },
+     "react-router": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "react-router-dom": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "react-scripts": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "resolve-url-loader": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "rollup-plugin-terser": {
+      "severidad": "high",
+      "directa": false
+     },
+     "serialize-javascript": {
+      "severidad": "high",
+      "directa": false
+     },
+     "sockjs": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "svgo": {
+      "severidad": "high",
+      "directa": false
+     },
+     "underscore": {
+      "severidad": "high",
+      "directa": false
+     },
+     "uuid": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "webpack-dev-middleware": {
+      "severidad": "high",
+      "directa": false
+     },
+     "webpack-dev-server": {
+      "severidad": "high",
+      "directa": false
+     },
+     "workbox-build": {
+      "severidad": "high",
+      "directa": false
+     },
+     "workbox-webpack-plugin": {
+      "severidad": "low",
+      "directa": false
+     }
+    }
+   }
+  }
+ },
+ "final": {
+  "etiqueta": "v1.0.0",
+  "commit": "5295ae2",
+  "fecha": "2026-11-05 11:23 -0600",
+  "node": "v24.14.1",
+  "npm": "11.11.0",
+  "lineas": {
+   "ref": "v1.0.0",
+   "commit": "5295ae2",
+   "servidor": {
+    "archivos_js": 14,
+    "lineas_js": 670,
+    "archivos_aplicacion": 7,
+    "lineas_aplicacion": 284,
+    "archivos_prueba": 6,
+    "lineas_prueba": 372
+   },
+   "cliente": {
+    "archivos_js": 15,
+    "lineas_js": 1212,
+    "archivos_aplicacion": 9,
+    "lineas_aplicacion": 738,
+    "archivos_prueba": 5,
+    "lineas_prueba": 450
+   }
+  },
+  "pruebas": {
+   "servidor": {
+    "total": 25,
+    "aprobadas": 25,
+    "fallidas": 0,
+    "suites": 4,
+    "lineas": 98.82,
+    "sentencias": 98.82,
+    "funciones": 95.83,
+    "ramas": 86.66
+   },
+   "cliente": {
+    "total": 23,
+    "aprobadas": 23,
+    "fallidas": 0,
+    "suites": 5,
+    "lineas": 100,
+    "sentencias": 100,
+    "funciones": 100,
+    "ramas": 93.75
+   }
+  },
+  "sonar": {
+   "medidas": {
+    "complexity": "112",
+    "minor_violations": "0",
+    "duplicated_lines_density": "0.0",
+    "duplicated_lines": "0",
+    "functions": "87",
+    "classes": "5",
+    "security_hotspots_reviewed": "100.0",
+    "statements": "189",
+    "sqale_index": "0",
+    "sqale_rating": "1.0",
+    "blocker_violations": "0",
+    "bugs": "0",
+    "uncovered_conditions": "5",
+    "lines_to_cover": "190",
+    "major_violations": "0",
+    "branch_coverage": "89.1",
+    "duplicated_files": "0",
+    "reliability_remediation_effort": "0",
+    "ncloc": "822",
+    "line_coverage": "99.5",
+    "lines": "975",
+    "coverage": "97.5",
+    "reliability_rating": "1.0",
+    "code_smells": "0",
+    "security_rating": "1.0",
+    "violations": "0",
+    "sqale_debt_ratio": "0.0",
+    "security_hotspots": "0",
+    "security_review_rating": "1.0",
+    "critical_violations": "0",
+    "info_violations": "0",
+    "alert_status": "OK",
+    "uncovered_lines": "1",
+    "cognitive_complexity": "21",
+    "duplicated_blocks": "0",
+    "vulnerabilities": "0",
+    "files": "19",
+    "conditions_to_cover": "46",
+    "open_issues": "0",
+    "software_quality_reliability_issues": "0",
+    "security_remediation_effort": "0",
+    "software_quality_security_issues": "0",
+    "software_quality_maintainability_issues": "0"
+   },
+   "distribucion": {
+    "total": 0,
+    "severidad_antigua": {},
+    "tipo_antiguo": {},
+    "cualidad_y_severidad": {},
+    "regla": {},
+    "archivo": {}
+   },
+   "gate": {
+    "status": "OK",
+    "conditions": [
+     {
+      "status": "OK",
+      "metricKey": "new_reliability_rating",
+      "comparator": "GT",
+      "periodIndex": 1,
+      "errorThreshold": "1",
+      "actualValue": "1"
+     },
+     {
+      "status": "OK",
+      "metricKey": "new_security_rating",
+      "comparator": "GT",
+      "periodIndex": 1,
+      "errorThreshold": "1",
+      "actualValue": "1"
+     },
+     {
+      "status": "OK",
+      "metricKey": "new_maintainability_rating",
+      "comparator": "GT",
+      "periodIndex": 1,
+      "errorThreshold": "1",
+      "actualValue": "1"
+     },
+     {
+      "status": "OK",
+      "metricKey": "new_coverage",
+      "comparator": "LT",
+      "periodIndex": 1,
+      "errorThreshold": "80",
+      "actualValue": "93.1"
+     },
+     {
+      "status": "OK",
+      "metricKey": "new_duplicated_lines_density",
+      "comparator": "GT",
+      "periodIndex": 1,
+      "errorThreshold": "3",
+      "actualValue": "0.0"
+     },
+     {
+      "status": "OK",
+      "metricKey": "new_security_hotspots_reviewed",
+      "comparator": "LT",
+      "periodIndex": 1,
+      "errorThreshold": "100",
+      "actualValue": "100.0"
+     }
+    ],
+    "periods": [
+     {
+      "index": 1,
+      "mode": "previous_version",
+      "date": "2026-11-05T08:20:37+0000",
+      "parameter": "0.0.0"
+     }
+    ],
+    "ignoredConditions": false
+   },
+   "analisis": {
+    "key": "3d8b28d3-74b4-430f-aea1-f4615c63355d",
+    "date": "2026-11-05T17:22:43+0000",
+    "events": [
+     {
+      "key": "AaGsvIZsvaNtt0D4GlOc",
+      "category": "VERSION",
+      "name": "1.0.0"
+     }
+    ],
+    "projectVersion": "1.0.0",
+    "manualNewCodePeriodBaseline": false,
+    "revision": "5295ae2087fa41676c1a66b7d086b4898d8639be"
+   },
+   "perfiles": [
+    {
+     "lenguaje": "css",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 49
+    },
+    {
+     "lenguaje": "docker",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 61
+    },
+    {
+     "lenguaje": "githubactions",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 45
+    },
+    {
+     "lenguaje": "js",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 481
+    },
+    {
+     "lenguaje": "json",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 2
+    },
+    {
+     "lenguaje": "secrets",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 357
+    },
+    {
+     "lenguaje": "text",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 11
+    },
+    {
+     "lenguaje": "ts",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 496
+    },
+    {
+     "lenguaje": "web",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 61
+    },
+    {
+     "lenguaje": "yaml",
+     "perfil": "Sonar way comprehensive",
+     "reglas": 2
+    }
+   ],
+   "hotspots": 0,
+   "archivos": [
+    {
+     "ruta": "react-client/src/components/add-tutorial.component.js",
+     "lenguaje": "js",
+     "ncloc": 102,
+     "lineas": 114
+    },
+    {
+     "ruta": "react-client/src/App.css",
+     "lenguaje": "css",
+     "ncloc": 13,
+     "lineas": 16
+    },
+    {
+     "ruta": "react-client/src/App.js",
+     "lenguaje": "js",
+     "ncloc": 42,
+     "lineas": 46
+    },
+    {
+     "ruta": "node-express-server/app.js",
+     "lenguaje": "js",
+     "ncloc": 15,
+     "lineas": 28
+    },
+    {
+     "ruta": "node-express-server/app/config/db.config.js",
+     "lenguaje": "js",
+     "ncloc": 15,
+     "lineas": 17
+    },
+    {
+     "ruta": "node-express-server/eslint.config.mjs",
+     "lenguaje": "js",
+     "ncloc": 21,
+     "lineas": 23
+    },
+    {
+     "ruta": "react-client/src/http-common.js",
+     "lenguaje": "js",
+     "ncloc": 7,
+     "lineas": 9
+    },
+    {
+     "ruta": "react-client/src/index.js",
+     "lenguaje": "js",
+     "ncloc": 13,
+     "lineas": 18
+    },
+    {
+     "ruta": "node-express-server/app/models/index.js",
+     "lenguaje": "js",
+     "ncloc": 18,
+     "lineas": 25
+    },
+    {
+     "ruta": "node-express-server/jest.config.js",
+     "lenguaje": "js",
+     "ncloc": 14,
+     "lineas": 15
+    },
+    {
+     "ruta": "node-express-server/server.js",
+     "lenguaje": "js",
+     "ncloc": 14,
+     "lineas": 18
+    },
+    {
+     "ruta": "react-client/src/setupTests.js",
+     "lenguaje": "js",
+     "ncloc": 14,
+     "lineas": 25
+    },
+    {
+     "ruta": "react-client/src/components/tutorial.component.js",
+     "lenguaje": "js",
+     "ncloc": 177,
+     "lineas": 193
+    },
+    {
+     "ruta": "node-express-server/app/controllers/tutorial.controller.js",
+     "lenguaje": "js",
+     "ncloc": 132,
+     "lineas": 158
+    },
+    {
+     "ruta": "node-express-server/app/models/tutorial.model.js",
+     "lenguaje": "js",
+     "ncloc": 14,
+     "lineas": 16
+    },
+    {
+     "ruta": "node-express-server/app/routes/tutorial.routes.js",
+     "lenguaje": "js",
+     "ncloc": 12,
+     "lineas": 29
+    },
+    {
+     "ruta": "react-client/src/services/tutorial.service.js",
+     "lenguaje": "js",
+     "ncloc": 26,
+     "lineas": 36
+    },
+    {
+     "ruta": "react-client/src/components/tutorials-list.component.js",
+     "lenguaje": "js",
+     "ncloc": 163,
+     "lineas": 177
+    },
+    {
+     "ruta": "react-client/src/common/with-router.js",
+     "lenguaje": "js",
+     "ncloc": 10,
+     "lineas": 12
+    }
+   ]
+  },
+  "eslint": {
+   "servidor": {
+    "errores": 0,
+    "advertencias": 0,
+    "reglas": {}
+   },
+   "cliente": {
+    "errores": 0,
+    "advertencias": 0,
+    "reglas": {}
+   }
+  },
+  "prettier": {
+   "revisados": 47,
+   "sin_formato": 0
+  },
+  "audit": {
+   "servidor": {
+    "critica": 0,
+    "alta": 0,
+    "moderada": 21,
+    "baja": 3,
+    "total": 24,
+    "dependencias": 501,
+    "dependencias_produccion": 102,
+    "paquetes": {
+     "@eslint/config-array": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "@eslint/js": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "@jest/core": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "@jest/expect": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "@jest/globals": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "@jest/reporters": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "@jest/transform": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "babel-jest": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "babel-plugin-istanbul": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "deepmerge": {
+      "severidad": "low",
+      "directa": false
+     },
+     "eslint": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "glob": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "jest": {
+      "severidad": "low",
+      "directa": true
+     },
+     "jest-circus": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "jest-cli": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-config": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "jest-resolve-dependencies": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "jest-runner": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "jest-runtime": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "jest-snapshot": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "minimatch": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "sequelize": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "test-exclude": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "uuid": {
+      "severidad": "moderate",
+      "directa": false
+     }
+    }
+   },
+   "servidor_produccion": {
+    "critica": 0,
+    "alta": 0,
+    "moderada": 2,
+    "baja": 0,
+    "total": 2,
+    "dependencias": 501,
+    "dependencias_produccion": 102,
+    "paquetes": {
+     "sequelize": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "uuid": {
+      "severidad": "moderate",
+      "directa": false
+     }
+    }
+   },
+   "cliente": {
+    "critica": 0,
+    "alta": 13,
+    "moderada": 7,
+    "baja": 16,
+    "total": 36,
+    "dependencias": 1517,
+    "dependencias_produccion": 1509,
+    "paquetes": {
+     "@jest/core": {
+      "severidad": "low",
+      "directa": false
+     },
+     "@rollup/plugin-node-resolve": {
+      "severidad": "low",
+      "directa": false
+     },
+     "@svgr/plugin-svgo": {
+      "severidad": "high",
+      "directa": false
+     },
+     "@svgr/webpack": {
+      "severidad": "low",
+      "directa": false
+     },
+     "@tootallnate/once": {
+      "severidad": "low",
+      "directa": false
+     },
+     "bfj": {
+      "severidad": "high",
+      "directa": false
+     },
+     "css-minimizer-webpack-plugin": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "css-select": {
+      "severidad": "high",
+      "directa": false
+     },
+     "deepmerge": {
+      "severidad": "low",
+      "directa": false
+     },
+     "fork-ts-checker-webpack-plugin": {
+      "severidad": "low",
+      "directa": false
+     },
+     "http-proxy-agent": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-cli": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-config": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-environment-jsdom": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-runner": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jest-watch-typeahead": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jsdom": {
+      "severidad": "low",
+      "directa": false
+     },
+     "jsonpath": {
+      "severidad": "high",
+      "directa": false
+     },
+     "nth-check": {
+      "severidad": "high",
+      "directa": false
+     },
+     "postcss": {
+      "severidad": "high",
+      "directa": false
+     },
+     "react-dev-utils": {
+      "severidad": "low",
+      "directa": false
+     },
+     "react-router": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "react-router-dom": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "react-scripts": {
+      "severidad": "moderate",
+      "directa": true
+     },
+     "resolve-url-loader": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "rollup-plugin-terser": {
+      "severidad": "high",
+      "directa": false
+     },
+     "serialize-javascript": {
+      "severidad": "high",
+      "directa": false
+     },
+     "sockjs": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "svgo": {
+      "severidad": "high",
+      "directa": false
+     },
+     "underscore": {
+      "severidad": "high",
+      "directa": false
+     },
+     "uuid": {
+      "severidad": "moderate",
+      "directa": false
+     },
+     "webpack-dev-middleware": {
+      "severidad": "high",
+      "directa": false
+     },
+     "webpack-dev-server": {
+      "severidad": "high",
+      "directa": false
+     },
+     "workbox-build": {
+      "severidad": "high",
+      "directa": false
+     },
+     "workbox-webpack-plugin": {
+      "severidad": "low",
+      "directa": false
+     }
+    }
+   },
+   "raiz": {
+    "critica": 0,
+    "alta": 0,
+    "moderada": 0,
+    "baja": 0,
+    "total": 0,
+    "dependencias": 1,
+    "dependencias_produccion": 1,
+    "paquetes": {}
+   }
+  }
+ }
+}
