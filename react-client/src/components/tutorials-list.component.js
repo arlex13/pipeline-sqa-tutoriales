@@ -38,7 +38,6 @@ export default class TutorialsList extends Component {
         this.setState({
           tutorials: response.data,
         });
-        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -62,8 +61,7 @@ export default class TutorialsList extends Component {
 
   removeAllTutorials() {
     TutorialDataService.deleteAll()
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
         this.refreshList();
       })
       .catch((e) => {
@@ -82,7 +80,6 @@ export default class TutorialsList extends Component {
         this.setState({
           tutorials: response.data,
         });
-        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
