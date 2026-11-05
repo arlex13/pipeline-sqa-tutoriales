@@ -1,0 +1,42 @@
+[
+ {
+  "ref": "v0-linea-base",
+  "commit": "4211d44",
+  "servidor": {
+   "archivos_js": 6,
+   "lineas_js": 276,
+   "archivos_aplicacion": 6,
+   "lineas_aplicacion": 276,
+   "archivos_prueba": 0,
+   "lineas_prueba": 0
+  },
+  "cliente": {
+   "archivos_js": 10,
+   "lineas_js": 752,
+   "archivos_aplicacion": 9,
+   "lineas_aplicacion": 747,
+   "archivos_prueba": 0,
+   "lineas_prueba": 0
+  }
+ },
+ {
+  "ref": "v1.0.0",
+  "commit": "5295ae2",
+  "servidor": {
+   "archivos_js": 14,
+   "lineas_js": 670,
+   "archivos_aplicacion": 7,
+   "lineas_aplicacion": 284,
+   "archivos_prueba": 6,
+   "lineas_prueba": 372
+  },
+  "cliente": {
+   "archivos_js": 15,
+   "lineas_js": 1212,
+   "archivos_aplicacion": 9,
+   "lineas_aplicacion": 738,
+   "archivos_prueba": 5,
+   "lineas_prueba": 450
+  }
+ }
+]
