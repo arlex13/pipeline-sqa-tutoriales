@@ -1,0 +1,206 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "mysql2": {
+      "name": "mysql2",
+      "severity": "critical",
+      "isDirect": true,
+      "via": [
+        {
+          "source": 1096970,
+          "name": "mysql2",
+          "dependency": "mysql2",
+          "title": "mysql2 Remote Code Execution (RCE) via the readCodeFor function",
+          "url": "https://github.com/advisories/GHSA-fpw7-j2hg-69v5",
+          "severity": "critical",
+          "cwe": [
+            "CWE-94"
+          ],
+          "cvss": {
+            "score": 9.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<3.9.4"
+        },
+        {
+          "source": 1097180,
+          "name": "mysql2",
+          "dependency": "mysql2",
+          "title": "MySQL2 for Node Arbitrary Code Injection",
+          "url": "https://github.com/advisories/GHSA-4rch-2fh8-94vw",
+          "severity": "critical",
+          "cwe": [
+            "CWE-94"
+          ],
+          "cvss": {
+            "score": 9.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<3.9.7"
+        },
+        {
+          "source": 1097488,
+          "name": "mysql2",
+          "dependency": "mysql2",
+          "title": "mysql2 vulnerable to Prototype Pollution",
+          "url": "https://github.com/advisories/GHSA-pmh2-wpjm-fj45",
+          "severity": "high",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 8.2,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:L"
+          },
+          "range": "<3.9.8"
+        },
+        {
+          "source": 1098367,
+          "name": "mysql2",
+          "dependency": "mysql2",
+          "title": "mysql2 cache poisoning vulnerability",
+          "url": "https://github.com/advisories/GHSA-mqr2-w7wj-jjgr",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-20"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:L"
+          },
+          "range": "<3.9.3"
+        },
+        {
+          "source": 1098617,
+          "name": "mysql2",
+          "dependency": "mysql2",
+          "title": "mysql2 vulnerable to Prototype Poisoning",
+          "url": "https://github.com/advisories/GHSA-49j4-86m8-q2jw",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L"
+          },
+          "range": "<3.9.4"
+        },
+        {
+          "source": 1153173,
+          "name": "mysql2",
+          "dependency": "mysql2",
+          "title": "MySQL2: Auth Plugin Downgrade to mysql_clear_password Leaks Plaintext Credentials",
+          "url": "https://github.com/advisories/GHSA-3f6p-5ww8-9rcr",
+          "severity": "high",
+          "cwe": [
+            "CWE-522"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<3.22.0"
+        },
+        {
+          "source": 1158532,
+          "name": "mysql2",
+          "dependency": "mysql2",
+          "title": "MySQL2: Unbounded zlib inflate in compressed MySQL protocol handler allows decompression-bomb DoS",
+          "url": "https://github.com/advisories/GHSA-rgwj-5xj2-c3m3",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-409"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=3.23.0"
+        }
+      ],
+      "effects": [],
+      "range": "<=3.23.0",
+      "nodes": [
+        "node_modules/mysql2"
+      ],
+      "fixAvailable": {
+        "name": "mysql2",
+        "version": "3.24.6",
+        "isSemVerMajor": true
+      }
+    },
+    "sequelize": {
+      "name": "sequelize",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "uuid"
+      ],
+      "effects": [],
+      "range": "0.0.0-development || >=3.30.1",
+      "nodes": [
+        "node_modules/sequelize"
+      ],
+      "fixAvailable": {
+        "name": "sequelize",
+        "version": "3.30.0",
+        "isSemVerMajor": true
+      }
+    },
+    "uuid": {
+      "name": "uuid",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1119441,
+          "name": "uuid",
+          "dependency": "uuid",
+          "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+          "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-787",
+            "CWE-1285"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": "<11.1.1"
+        }
+      ],
+      "effects": [
+        "sequelize"
+      ],
+      "range": "<11.1.1",
+      "nodes": [
+        "node_modules/uuid"
+      ],
+      "fixAvailable": {
+        "name": "sequelize",
+        "version": "3.30.0",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 2,
+      "high": 0,
+      "critical": 1,
+      "total": 3
+    },
+    "dependencies": {
+      "prod": 104,
+      "dev": 0,
+      "optional": 0,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 103
+    }
+  }
+}
