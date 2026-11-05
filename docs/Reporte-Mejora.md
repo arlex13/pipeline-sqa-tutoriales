@@ -203,7 +203,7 @@ Estado final, con las cuatro etapas en verde:
 
 ## 9. Revisión manual
 
-Cada pull request que se fusionó lleva el comentario de revisión del responsable. La plantilla y el SQA Plan piden que la revisión sea antes del merge, y en tres de ellos fue después. Se deja escrito tal como ocurrió:
+Cada pull request que se fusionó lleva el comentario de revisión del responsable. La plantilla y el SQA Plan piden que la revisión sea antes del merge, y en cuatro de ellos fue después. Se deja escrito tal como ocurrió:
 
 | Pull request                                                      | Merge | Comentario de revisión | Orden             |
 | ----------------------------------------------------------------- | ----- | ---------------------- | ----------------- |
@@ -211,8 +211,9 @@ Cada pull request que se fusionó lleva el comentario de revisión del responsab
 | [#18](https://github.com/arlex13/pipeline-sqa-tutoriales/pull/18) | 09:52 | 10:08                  | Después del merge |
 | [#19](https://github.com/arlex13/pipeline-sqa-tutoriales/pull/19) | 10:01 | 10:15                  | Después del merge |
 | [#22](https://github.com/arlex13/pipeline-sqa-tutoriales/pull/22) | 11:20 | 11:20                  | Antes del merge   |
+| [#23](https://github.com/arlex13/pipeline-sqa-tutoriales/pull/23) | 14:29 | 14:31                  | Después del merge |
 
-Las horas son del 5 de noviembre de 2026, en la hora de Guatemala. Los gates automáticos sí corrieron antes de cada merge, porque la protección de `main` no deja fusionar sin ellos.
+Las horas son del 5 de noviembre de 2026, en la hora de Guatemala. Los gates automáticos sí corrieron antes de cada merge, porque la protección de `main` no deja fusionar sin ellos. La tabla llega hasta el [#23](https://github.com/arlex13/pipeline-sqa-tutoriales/pull/23); el pull request que la actualizó tiene su revisión en GitHub.
 
 ## 10. Cómo leer estas cifras
 
