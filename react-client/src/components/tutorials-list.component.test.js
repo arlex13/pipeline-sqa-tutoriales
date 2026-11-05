@@ -40,7 +40,7 @@ describe("TutorialsList", () => {
       screen.getByText("Please click on a Tutorial..."),
     ).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("Node"));
+    fireEvent.click(screen.getByRole("button", { name: "Node" }));
 
     expect(screen.getByText("Curso de Node")).toBeInTheDocument();
     expect(screen.getByText("Published")).toBeInTheDocument();
@@ -49,7 +49,7 @@ describe("TutorialsList", () => {
       "/tutorials/1",
     );
 
-    fireEvent.click(screen.getByText("React"));
+    fireEvent.click(screen.getByRole("button", { name: "React" }));
 
     expect(screen.getByText("Curso de React")).toBeInTheDocument();
     expect(screen.getByText("Pending")).toBeInTheDocument();

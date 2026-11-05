@@ -141,9 +141,7 @@ class Tutorial extends Component {
               </div>
 
               <div className="form-group">
-                <label>
-                  <strong>Status:</strong>
-                </label>
+                <strong className="d-inline-block mb-2">Status:</strong>
                 {currentTutorial.published ? "Published" : "Pending"}
               </div>
             </form>
