@@ -86,7 +86,7 @@ exports.update = (req, res) => {
           message: "Tutorial was updated successfully.",
         });
       } else {
-        res.status(404).send({
+        res.send({
           message: `Cannot update Tutorial with id=${id}. Tutorial was not found.`,
         });
       }
