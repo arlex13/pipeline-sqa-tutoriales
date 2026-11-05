@@ -78,14 +78,16 @@ exports.update = (req, res) => {
   Tutorial.update(req.body, {
     where: { id: id },
   })
-    .then(([num]) => {
-      if (num === 1) {
+    .then(async ([num]) => {
+      // MySQL informa 0 filas también cuando los mismos datos llegan dentro del
+      // mismo segundo, así que hay que consultar si el id existe antes del 404.
+      if (num === 1 || (await Tutorial.findByPk(id))) {
         res.send({
           message: "Tutorial was updated successfully.",
         });
       } else {
-        res.send({
-          message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`,
+        res.status(404).send({
+          message: `Cannot update Tutorial with id=${id}. Tutorial was not found.`,
         });
       }
     })
@@ -110,8 +112,8 @@ exports.delete = (req, res) => {
           message: "Tutorial was deleted successfully!",
         });
       } else {
-        res.send({
-          message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`,
+        res.status(404).send({
+          message: `Cannot delete Tutorial with id=${id}. Tutorial was not found.`,
         });
       }
     })
