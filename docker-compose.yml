@@ -1,0 +1,27 @@
+# Levanta solo MySQL. La API y el cliente corren en la máquina, con npm start.
+# Con `docker compose up -d --wait` basta: los valores por defecto son marcadores de desarrollo, no secretos.
+# El script de docker/mysql-init solo corre con el volumen vacío; si ya hay datos, usa `docker compose down -v`.
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: ${DB_NAME:-tutorials}
+      MYSQL_USER: ${DB_USER:-tutorials_app}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-cambia_esto}
+    ports:
+      - "127.0.0.1:${DB_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - mysqladmin ping -h 127.0.0.1 -u"$$MYSQL_USER" -p"$$MYSQL_PASSWORD" --silent
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+volumes:
+  mysql_data:

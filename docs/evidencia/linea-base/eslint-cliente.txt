@@ -1,0 +1,14 @@
+
+react-client/src/components/add-tutorial.component.js
+  35:5  warning  Unexpected var, use let or const instead  no-var
+
+react-client/src/components/tutorial.component.js
+  68:5  warning  Unexpected var, use let or const instead  no-var
+
+react-client/src/services/tutorial.service.js
+  33:1  warning  Assign instance to a variable before exporting as module default  import/no-anonymous-default-export
+
+✖ 3 problems (0 errors, 3 warnings)
+  0 errors and 2 warnings potentially fixable with the `--fix` option.
+
+ESLint found too many warnings (maximum: 0).

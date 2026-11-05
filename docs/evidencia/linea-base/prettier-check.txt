@@ -1,0 +1,21 @@
+Checking formatting...
+[warn] README.md
+[warn] node-express-server/app/config/db.config.js
+[warn] node-express-server/app/controllers/tutorial.controller.js
+[warn] node-express-server/app/models/index.js
+[warn] node-express-server/app/models/tutorial.model.js
+[warn] node-express-server/app/routes/turorial.routes.js
+[warn] node-express-server/README.md
+[warn] node-express-server/server.js
+[warn] react-client/README.md
+[warn] react-client/public/index.html
+[warn] react-client/src/App.js
+[warn] react-client/src/components/add-tutorial.component.js
+[warn] react-client/src/components/tutorial.component.js
+[warn] react-client/src/components/tutorials-list.component.js
+[warn] react-client/src/http-common.js
+[warn] react-client/src/index.js
+[warn] react-client/src/services/tutorial.service.js
+[warn] react-client/src/serviceWorker.js
+[warn] react-client/src/setupTests.js
+[warn] Code style issues found in 19 files. Run Prettier with --write to fix.

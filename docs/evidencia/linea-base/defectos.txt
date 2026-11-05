@@ -1,0 +1,197 @@
+Confirmación de defectos sobre v0-linea-base (4211d44)
+Fecha: 2026-11-05 02:28:03 -0600
+Node v24.14.1, MySQL en contenedor mysql:8.4 con la configuración original del código
+
+=== Peticiones reales a la API ===
+
+--- Crear (D-03: se espera 201)
+curl -X POST http://localhost:8080/api/tutorials -H 'Content-Type: application/json' -d '{"title":"Uno","description":"Primero"}'
+{"id":1,"title":"Uno","description":"Primero","published":false,"updatedAt":"2026-11-05T08:28:03.794Z","createdAt":"2026-11-05T08:28:03.794Z"}
+HTTP 200
+
+--- Crear uno publicado
+curl -X POST http://localhost:8080/api/tutorials -H 'Content-Type: application/json' -d '{"title":"Dos","description":"Segundo","published":true}'
+{"id":2,"title":"Dos","description":"Segundo","published":true,"updatedAt":"2026-11-05T08:28:03.871Z","createdAt":"2026-11-05T08:28:03.871Z"}
+HTTP 200
+
+--- Crear sin title: debe responder 400
+curl -X POST http://localhost:8080/api/tutorials -H 'Content-Type: application/json' -d '{"description":"Sin titulo"}'
+{"message":"Content can not be empty!"}
+HTTP 400
+
+--- Listar todos
+curl -X GET http://localhost:8080/api/tutorials
+[{"id":1,"title":"Uno","description":"Primero","published":false,"createdAt":"2026-11-05T08:28:03.000Z","updatedAt":"2026-11-05T08:28:03.000Z"},{"id":2,"title":"Dos","description":"Segundo","published":true,"createdAt":"2026-11-05T08:28:03.000Z","updatedAt":"2026-11-05T08:28:03.000Z"}]
+HTTP 200
+
+--- Filtrar por title
+curl -X GET http://localhost:8080/api/tutorials?title=Un
+[{"id":1,"title":"Uno","description":"Primero","published":false,"createdAt":"2026-11-05T08:28:03.000Z","updatedAt":"2026-11-05T08:28:03.000Z"}]
+HTTP 200
+
+--- Listar publicados
+curl -X GET http://localhost:8080/api/tutorials/published
+[{"id":2,"title":"Dos","description":"Segundo","published":true,"createdAt":"2026-11-05T08:28:03.000Z","updatedAt":"2026-11-05T08:28:03.000Z"}]
+HTTP 200
+
+--- Obtener uno
+curl -X GET http://localhost:8080/api/tutorials/1
+{"id":1,"title":"Uno","description":"Primero","published":false,"createdAt":"2026-11-05T08:28:03.000Z","updatedAt":"2026-11-05T08:28:03.000Z"}
+HTTP 200
+
+--- Obtener un id inexistente: debe responder 404
+curl -X GET http://localhost:8080/api/tutorials/9999
+{"message":"Cannot find Tutorial with id=9999."}
+HTTP 404
+
+--- Actualizar con un campo distinto
+curl -X PUT http://localhost:8080/api/tutorials/1 -H 'Content-Type: application/json' -d '{"title":"Uno editado"}'
+{"message":"Tutorial was updated successfully."}
+HTTP 200
+
+--- Actualizar con los mismos datos, poco después
+curl -X PUT http://localhost:8080/api/tutorials/1 -H 'Content-Type: application/json' -d '{"title":"Uno editado"}'
+{"message":"Cannot update Tutorial with id=1. Maybe Tutorial was not found or req.body is empty!"}
+HTTP 200
+
+--- D-01: actualizar un id inexistente (se espera 404)
+curl -X PUT http://localhost:8080/api/tutorials/9999 -H 'Content-Type: application/json' -d '{"title":"Nada"}'
+{"message":"Cannot update Tutorial with id=9999. Maybe Tutorial was not found or req.body is empty!"}
+HTTP 200
+
+--- D-02: eliminar un id inexistente (se espera 404)
+curl -X DELETE http://localhost:8080/api/tutorials/9999
+{"message":"Cannot delete Tutorial with id=9999. Maybe Tutorial was not found!"}
+HTTP 200
+
+--- D-14: POST con id no numérico (la ruta no existe)
+curl -X POST http://localhost:8080/api/tutorials/abc -H 'Content-Type: application/json' -d '{"title":"Nada"}'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot POST /api/tutorials/abc</pre>
+</body>
+</html>
+
+HTTP 404
+
+--- D-14: GET con id no numérico
+curl -X GET http://localhost:8080/api/tutorials/abc
+{"message":"Cannot find Tutorial with id=abc."}
+HTTP 404
+
+--- D-14: PUT con id no numérico
+curl -X PUT http://localhost:8080/api/tutorials/abc -H 'Content-Type: application/json' -d '{"title":"Nada"}'
+{"message":"Error updating Tutorial with id=abc"}
+HTTP 500
+
+--- D-14: DELETE con id no numérico
+curl -X DELETE http://localhost:8080/api/tutorials/abc
+{"message":"Could not delete Tutorial with id=abc"}
+HTTP 500
+
+--- Eliminar uno
+curl -X DELETE http://localhost:8080/api/tutorials/1
+{"message":"Tutorial was deleted successfully!"}
+HTTP 200
+
+--- D-04: eliminar todos, sin ninguna autenticación
+curl -X DELETE http://localhost:8080/api/tutorials
+{"message":"1 Tutorials were deleted successfully!"}
+HTTP 200
+
+--- La tabla quedó vacía
+curl -X GET http://localhost:8080/api/tutorials
+[]
+HTTP 200
+
+--- La trampa de D-01: los mismos datos, dentro del mismo segundo y en otro segundo
+Sequelize actualiza updatedAt, que en MySQL guarda segundos. Dentro del mismo segundo no cambia ningún dato y MySQL informa 0 filas.
+2026-11-05T08:28:06.113Z PUT /3 HTTP 200 Tutorial was updated successfully.
+2026-11-05T08:28:06.128Z PUT /3 HTTP 200 Cannot update Tutorial with id=3. Maybe Tutorial was not found or req.body is empty!
+2026-11-05T08:28:06.134Z PUT /3 HTTP 200 Cannot update Tutorial with id=3. Maybe Tutorial was not found or req.body is empty!
+2026-11-05T08:28:06.139Z PUT /3 HTTP 200 Cannot update Tutorial with id=3. Maybe Tutorial was not found or req.body is empty!
+2026-11-05T08:28:07.659Z PUT /3 HTTP 200 Tutorial was updated successfully. (otro segundo)
+
+=== Revisión del código de la etiqueta ===
+
+--- D-05: credenciales escritas en el código
+v0-linea-base:node-express-server/app/config/db.config.js:3:  USER: "root",
+v0-linea-base:node-express-server/app/config/db.config.js:4:  PASSWORD: "123456",
+
+--- D-06: server.js crea la app, sincroniza y escucha
+v0-linea-base:node-express-server/server.js:4:const app = express();
+v0-linea-base:node-express-server/server.js:20:db.sequelize.sync()
+v0-linea-base:node-express-server/server.js:42:app.listen(PORT, () => {
+
+--- D-07: operatorsAliases
+v0-linea-base:node-express-server/app/models/index.js:7:  operatorsAliases: false,
+
+--- D-08: var y ==
+v0-linea-base:node-express-server/app/controllers/tutorial.controller.js:38:  var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+v0-linea-base:node-express-server/app/controllers/tutorial.controller.js:81:      if (num == 1) {
+v0-linea-base:node-express-server/app/controllers/tutorial.controller.js:106:      if (num == 1) {
+v0-linea-base:node-express-server/app/routes/turorial.routes.js:4:  var router = require("express").Router();
+v0-linea-base:node-express-server/server.js:6:var corsOptions = {
+v0-linea-base:react-client/src/components/add-tutorial.component.js:35:    var data = {
+v0-linea-base:react-client/src/components/tutorial.component.js:68:    var data = {
+
+--- D-08: parámetros err sin usar y errores tragados
+v0-linea-base:node-express-server/app/controllers/tutorial.controller.js:27:    .catch(err => {
+v0-linea-base:node-express-server/app/controllers/tutorial.controller.js:44:    .catch(err => {
+v0-linea-base:node-express-server/app/controllers/tutorial.controller.js:66:    .catch(err => {
+v0-linea-base:node-express-server/app/controllers/tutorial.controller.js:91:    .catch(err => {
+v0-linea-base:node-express-server/app/controllers/tutorial.controller.js:116:    .catch(err => {
+v0-linea-base:node-express-server/app/controllers/tutorial.controller.js:132:    .catch(err => {
+v0-linea-base:node-express-server/app/controllers/tutorial.controller.js:146:    .catch(err => {
+v0-linea-base:react-client/src/components/add-tutorial.component.js:53:        console.log(e);
+v0-linea-base:react-client/src/components/tutorial.component.js:63:        console.log(e);
+v0-linea-base:react-client/src/components/tutorial.component.js:86:        console.log(e);
+v0-linea-base:react-client/src/components/tutorial.component.js:102:        console.log(e);
+v0-linea-base:react-client/src/components/tutorial.component.js:113:        console.log(e);
+v0-linea-base:react-client/src/components/tutorials-list.component.js:44:        console.log(e);
+v0-linea-base:react-client/src/components/tutorials-list.component.js:70:        console.log(e);
+v0-linea-base:react-client/src/components/tutorials-list.component.js:88:        console.log(e);
+
+--- D-09: URL de la API escrita en el frontend
+v0-linea-base:react-client/src/http-common.js:4:  baseURL: "http://localhost:8080/api",
+
+--- D-10: .env versionado del cliente
+v0-linea-base:react-client/.env:1:PORT=8081
+
+--- D-11: nombre del archivo de rutas
+node-express-server/app/routes/turorial.routes.js
+
+--- D-12: Create React App
+v0-linea-base:react-client/package.json:14:    "react-scripts": "5.0.1"
+
+--- D-13: versión de mysql2
+v0-linea-base:node-express-server/package.json:22:    "mysql2": "^2.3.3",
+
+--- D-16: versión de axios
+v0-linea-base:react-client/package.json:9:    "axios": "^0.27.2",
+
+=== Paquetes con avisos, según npm audit ===
+
+node-express-server {"info":0,"low":0,"moderate":2,"high":0,"critical":1,"total":3}
+  mysql2 severidad=critical directa=true rango=<=3.23.0 avisos: critical: mysql2 Remote Code Execution (RCE) via the readCodeFor function | critical: MySQL2 for Node Arbitrary Code Injection | high: mysql2 vulnerable to Prototype Pollution | moderate: mysql2 cache poisoning vulnerability | moderate: mysql2 vulnerable to Prototype Poisoning | high: MySQL2: Auth Plugin Downgrade to mysql_clear_password Leaks Plaintext Credentials
+  sequelize severidad=moderate directa=true rango=0.0.0-development || >=3.30.1
+
+react-client {"info":0,"low":16,"moderate":7,"high":14,"critical":0,"total":37}
+  axios severidad=high directa=true rango=<=0.33.0 avisos: moderate: Axios Cross-Site Request Forgery Vulnerability | high: axios Requests Vulnerable To Possible SSRF and Credential Leakage via Absolute URL | moderate: Axios has a NO_PROXY Hostname Normalization Bypass that Leads to SSRF | moderate: Axios: Authentication Bypass via Prototype Pollution Gadget in `validateStatus` Merge Strategy | high: Axios: Incomplete Fix for CVE-2025-62718 — NO_PROXY Protection Bypassed via RFC 1122 Loopback Subnet (127.0.0.0/8) in Axios 1.15.0 | low: Axios: Null Byte Injection via Reverse-Encoding in AxiosURLSearchParams
+  react-router-dom severidad=moderate directa=true rango=6.0.0-alpha.0 - 7.17.0
+  react-scripts severidad=moderate directa=true rango=>=0.1.0
+
+=== Confirmación en el navegador ===
+
+--- D-15: el frontend muestra un éxito falso al editar un tutorial que ya no existe
+Registrado: 2026-11-05 02:28:08 -0600
+1. Crear un tutorial y abrir http://localhost:8081/tutorials/4 con la aplicación original.
+2. Eliminarlo por fuera de la interfaz: DELETE /api/tutorials/4, HTTP 200.
+3. Pulsar Update en el formulario, que sigue abierto.
+Red: PUT http://localhost:8080/api/tutorials/4 -> 200 OK
+Pantalla: The tutorial was updated successfully!

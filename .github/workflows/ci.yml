@@ -1,0 +1,289 @@
+name: CI
+
+on:
+  push:
+    # Cualquier rama, para cumplir "en cada push". Con este filtro los tags no disparan corridas.
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Cancela corridas obsoletas de la misma rama y evento. En main cada corrida termina,
+# porque su análisis define el estado de main en SonarCloud.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "24"
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            node-express-server/package-lock.json
+            react-client/package-lock.json
+
+      - name: Instalar dependencias de la raíz
+        run: npm ci --no-audit --no-fund
+
+      - name: Instalar dependencias del servidor
+        working-directory: node-express-server
+        run: npm ci --no-audit --no-fund
+
+      - name: Instalar dependencias del cliente
+        working-directory: react-client
+        run: npm ci --no-audit --no-fund
+
+      # Con CI=true, Create React App trata las advertencias de ESLint como errores.
+      - name: Compilar el cliente
+        working-directory: react-client
+        env:
+          CI: "true"
+        run: npm run build
+
+  test:
+    name: test
+    needs: build
+    runs-on: ubuntu-latest
+    # La contraseña es de un contenedor efímero que solo vive durante la corrida; no es un secreto.
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: ci_root
+          MYSQL_DATABASE: tutorials_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -pci_root"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: ci_root
+      DB_NAME: tutorials_test
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            node-express-server/package-lock.json
+            react-client/package-lock.json
+
+      - name: Instalar dependencias del servidor
+        working-directory: node-express-server
+        run: npm ci --no-audit --no-fund
+
+      - name: Pruebas del backend, con cobertura y umbral
+        working-directory: node-express-server
+        run: npm run test:ci
+
+      # Los pasos siguientes corren aunque falle el backend, para que una corrida
+      # roja también deje los resultados que necesita la matriz de pruebas.
+      - name: Instalar dependencias del cliente
+        if: ${{ !cancelled() }}
+        working-directory: react-client
+        run: npm ci --no-audit --no-fund
+
+      - name: Pruebas del frontend, con cobertura y umbral
+        if: ${{ !cancelled() }}
+        working-directory: react-client
+        env:
+          CI: "true"
+        run: npm run test:ci
+
+      - name: Subir resultados y cobertura
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: resultados-pruebas
+          if-no-files-found: error
+          path: |
+            node-express-server/coverage/lcov.info
+            node-express-server/coverage/coverage-summary.json
+            node-express-server/test-results.json
+            react-client/coverage/lcov.info
+            react-client/coverage/coverage-summary.json
+            react-client/test-results.json
+
+  analyze:
+    # El gate de npm audit solo bloquea en pull requests. El nombre distinto evita que
+    # la corrida de push, más permisiva, cuente como la verificación requerida "analyze".
+    name: ${{ github.event_name == 'pull_request' && 'analyze' || 'analyze-push' }}
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      # Historial completo: SonarCloud lo usa para saber qué código es nuevo.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            node-express-server/package-lock.json
+            react-client/package-lock.json
+
+      - name: Instalar dependencias de la raíz
+        run: npm ci --no-audit --no-fund
+
+      - name: Instalar dependencias del servidor
+        working-directory: node-express-server
+        run: npm ci --no-audit --no-fund
+
+      - name: Instalar dependencias del cliente
+        working-directory: react-client
+        run: npm ci --no-audit --no-fund
+
+      - name: ESLint del servidor
+        working-directory: node-express-server
+        run: npm run lint
+
+      - name: ESLint del cliente
+        working-directory: react-client
+        run: npm run lint
+
+      - name: Formato con Prettier
+        run: npm run format:check
+
+      # Bloquea solo en pull requests: la base de avisos cambia sola, y un aviso nuevo
+      # no debe poner main en rojo sin que haya cambiado el código.
+      - name: npm audit del servidor
+        working-directory: node-express-server
+        continue-on-error: ${{ github.event_name != 'pull_request' }}
+        run: npm audit --audit-level=high
+
+      # Solo reporte: es la deuda técnica aceptada D-12.
+      - name: npm audit del cliente
+        working-directory: react-client
+        continue-on-error: true
+        run: npm audit --audit-level=high
+
+      # Después del checkout, para que queden en las rutas de sonar-project.properties.
+      - name: Descargar resultados y cobertura
+        uses: actions/download-artifact@v8
+        with:
+          name: resultados-pruebas
+
+      - name: Análisis de SonarCloud y quality gate
+        uses: SonarSource/sonarqube-scan-action@v8
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.qualitygate.wait=true
+            -Dsonar.projectVersion=1.0.0
+
+  report:
+    name: report
+    needs: [build, test, analyze]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      # Puede no existir si la corrida falló antes de las pruebas.
+      - name: Descargar resultados y cobertura
+        uses: actions/download-artifact@v8
+        continue-on-error: true
+        with:
+          name: resultados-pruebas
+
+      - name: Escribir el resumen de la corrida
+        env:
+          R_BUILD: ${{ needs.build.result }}
+          R_TEST: ${{ needs.test.result }}
+          R_ANALYZE: ${{ needs.analyze.result }}
+        run: |
+          fila_cobertura() {
+            if [ -f "$2/coverage/coverage-summary.json" ]; then
+              jq -r --arg n "$1" '.total | "| \($n) | \(.lines.pct) % | \(.statements.pct) % | \(.functions.pct) % | \(.branches.pct) % |"' "$2/coverage/coverage-summary.json"
+            else
+              echo "| $1 | sin datos | sin datos | sin datos | sin datos |"
+            fi
+          }
+          fila_pruebas() {
+            if [ -f "$2/test-results.json" ]; then
+              jq -r --arg n "$1" '"| \($n) | \(.numTotalTests) | \(.numPassedTests) | \(.numFailedTests) |"' "$2/test-results.json"
+            else
+              echo "| $1 | sin datos | sin datos | sin datos |"
+            fi
+          }
+          {
+            echo "## Resultado del pipeline"
+            echo
+            echo "| Etapa | Resultado |"
+            echo "| --- | --- |"
+            echo "| build | ${R_BUILD} |"
+            echo "| test | ${R_TEST} |"
+            echo "| analyze | ${R_ANALYZE} |"
+            echo
+            echo "## Pruebas"
+            echo
+            echo "| Paquete | Total | Aprobadas | Fallidas |"
+            echo "| --- | --- | --- | --- |"
+            fila_pruebas "Servidor" node-express-server
+            fila_pruebas "Cliente" react-client
+            echo
+            echo "## Cobertura"
+            echo
+            echo "| Paquete | Líneas | Sentencias | Funciones | Ramas |"
+            echo "| --- | --- | --- | --- | --- |"
+            fila_cobertura "Servidor" node-express-server
+            fila_cobertura "Cliente" react-client
+          } > resumen-pipeline.md
+          cat resumen-pipeline.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publicar el reporte
+        uses: actions/upload-artifact@v7
+        with:
+          name: reporte-pipeline
+          path: resumen-pipeline.md
+
+      - name: Notificar a Telegram
+        if: ${{ !cancelled() && (github.event_name == 'pull_request' || github.ref == 'refs/heads/main') }}
+        continue-on-error: true
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          R_BUILD: ${{ needs.build.result }}
+          R_TEST: ${{ needs.test.result }}
+          R_ANALYZE: ${{ needs.analyze.result }}
+          SHA_REAL: ${{ github.event.pull_request.head.sha || github.sha }}
+          RAMA: ${{ github.head_ref || github.ref_name }}
+        run: |
+          if [ "$R_BUILD" = "success" ] && [ "$R_TEST" = "success" ] && [ "$R_ANALYZE" = "success" ]; then
+            ESTADO="✅ Pipeline aprobado"
+          else
+            ESTADO="❌ Pipeline rechazado"
+          fi
+          TEXTO="[Pipeline SQA] ${ESTADO}
+          Repo: ${GITHUB_REPOSITORY}
+          Rama: ${RAMA} (${GITHUB_EVENT_NAME})
+          Commit: ${SHA_REAL::7} por ${GITHUB_ACTOR}
+          build: ${R_BUILD} | test: ${R_TEST} | analyze: ${R_ANALYZE}
+          ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          curl -sS --fail-with-body -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
+            -d chat_id="${TG_CHAT}" \
+            --data-urlencode text="${TEXTO}" > /dev/null

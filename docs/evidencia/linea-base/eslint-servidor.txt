@@ -1,0 +1,18 @@
+
+node-express-server/app/controllers/tutorial.controller.js
+   38:3   error  Unexpected var, use let or const instead  no-var
+   66:12  error  'err' is defined but never used           no-unused-vars
+   81:15  error  Expected '===' and instead saw '=='       eqeqeq
+   91:12  error  'err' is defined but never used           no-unused-vars
+  106:15  error  Expected '===' and instead saw '=='       eqeqeq
+  116:12  error  'err' is defined but never used           no-unused-vars
+
+node-express-server/app/routes/turorial.routes.js
+  4:3  error  Unexpected var, use let or const instead  no-var
+
+node-express-server/server.js
+  6:1  error  Unexpected var, use let or const instead  no-var
+
+✖ 8 problems (8 errors, 0 warnings)
+  3 errors and 0 warnings potentially fixable with the `--fix` option.
+

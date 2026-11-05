@@ -1,0 +1,9 @@
+node_modules/
+coverage/
+build/
+.scannerwork/
+test-results.json
+
+# Variables de entorno. react-client/.env solo trae PORT=8081 y se mantiene versionado (D-10).
+.env
+!react-client/.env
